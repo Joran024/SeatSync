@@ -1,0 +1,13 @@
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SEATSYNC_SQL_PASSWORD:-SeatSync_Local_123!}
+    ports: ["14333:1433"]
+    volumes: ["seatsync_sql:/var/opt/mssql"]
+  redis:
+    image: redis:7-alpine
+    ports: ["16379:6379"]
+volumes:
+  seatsync_sql:
